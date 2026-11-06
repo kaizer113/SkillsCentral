@@ -35,7 +35,10 @@ jobs:
       - name: Install the verified demo CLI version
         run: python -m pip install 'redis-iris==1.0.1'
       - name: Validate local packages without network credentials
-        run: iris --json --no-input agent-playbooks skills validate "demo/sources/${{ matrix.source }}/skills"
+        run: >-
+          env -u IRIS_AGENT_PLAYBOOKS_URL -u IRIS_AGENT_PLAYBOOKS_PLAYBOOK_ID
+          -u IRIS_AGENT_PLAYBOOKS_API_KEY -u IRIS_AGENT_PLAYBOOKS_CONTENT_API_KEY
+          iris --json --no-input agent-playbooks skills validate "demo/sources/${{ matrix.source }}/skills"
       - name: Preview remote changes
         if: github.event_name != 'pull_request' && env.IRIS_AGENT_PLAYBOOKS_API_KEY != '' && env.IRIS_AGENT_PLAYBOOKS_URL != '' && env.IRIS_AGENT_PLAYBOOKS_PLAYBOOK_ID != ''
         run: iris --json --no-input agent-playbooks skills plan "demo/sources/${{ matrix.source }}/skills" --publish none
@@ -56,7 +59,11 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m pip install 'redis-iris==1.0.1'
-      - run: iris --json --no-input agent-playbooks faqs validate demo/faqs
+      - name: Validate local FAQs without network credentials
+        run: >-
+          env -u IRIS_AGENT_PLAYBOOKS_URL -u IRIS_AGENT_PLAYBOOKS_PLAYBOOK_ID
+          -u IRIS_AGENT_PLAYBOOKS_API_KEY -u IRIS_AGENT_PLAYBOOKS_CONTENT_API_KEY
+          iris --json --no-input agent-playbooks faqs validate demo/faqs
       - name: Preview FAQ changes
         if: github.event_name != 'pull_request' && env.IRIS_AGENT_PLAYBOOKS_API_KEY != '' && env.IRIS_AGENT_PLAYBOOKS_URL != '' && env.IRIS_AGENT_PLAYBOOKS_PLAYBOOK_ID != ''
         run: iris --json --no-input agent-playbooks faqs plan demo/faqs --publish none
