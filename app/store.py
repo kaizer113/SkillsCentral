@@ -8,6 +8,8 @@ from redis import Redis
 from redis.backoff import NoBackoff
 from redis.retry import Retry
 
+TURN_RETENTION_LIMIT = 2000
+
 
 def now():
     return datetime.now(timezone.utc).isoformat()
@@ -67,11 +69,11 @@ class Store:
     def record_turn(self, turn):
         pipe = self.r.pipeline(transaction=False)
         pipe.lpush(self.key("turns"), json.dumps(turn))
-        pipe.ltrim(self.key("turns"), 0, 1999)
+        pipe.ltrim(self.key("turns"), 0, TURN_RETENTION_LIMIT - 1)
         pipe.execute()
 
     def turns(self):
-        return [json.loads(v) for v in self.r.lrange(self.key("turns"), 0, 1999)]
+        return [json.loads(v) for v in self.r.lrange(self.key("turns"), 0, TURN_RETENTION_LIMIT - 1)]
 
     def session(self, user_id, session_id):
         return self.get(f"session:{user_id}:{session_id}", [])

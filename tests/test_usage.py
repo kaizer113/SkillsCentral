@@ -8,6 +8,56 @@ import pytest
 from test_governance import app_env, skill_fixture
 
 
+def test_history_spans_active_utc_days_and_preserves_full_coverage(app_env):
+    timestamps = ['2026-11-03T23:59:59Z', '2026-11-04T00:00:01Z', '2026-11-06T15:00:00Z']
+    for timestamp in timestamps:
+        app_env.store.record_turn({'created_at': timestamp, 'skills': [], 'usage': {'input_tokens': 2, 'output_tokens': 1, 'estimated_cost': .000007}})
+    data = app_env.client.get('/api/usage').json()
+    assert [day['date'] for day in data['daily']] == ['2026-11-03', '2026-11-04', '2026-11-06']
+    assert [day['turns'] for day in data['daily']] == [1, 1, 1]
+    assert data['history'] == {
+        'timezone': 'UTC', 'retained_turns': 3, 'retention_limit': 2000,
+        'first_turn_at': timestamps[0], 'last_turn_at': timestamps[-1],
+        'active_days': 3, 'chart_active_day_limit': 14, 'has_expiration': False,
+    }
+    assert data['summary']['turns'] == sum(day['turns'] for day in data['daily'])
+    assert data['storage']['product'] == 'Redis Cloud'
+    assert data['storage']['key'] == 'SkillsCentral:turns'
+    assert data['storage']['data_type'] == 'list'
+    assert data['storage']['write_commands'] == ['LPUSH', 'LTRIM']
+    assert data['storage']['read_command'] == 'LRANGE'
+
+
+def test_empty_history_has_no_implied_date_coverage(app_env):
+    data = app_env.client.get('/api/usage').json()
+    assert data['history']['retained_turns'] == data['history']['active_days'] == 0
+    assert data['history']['first_turn_at'] is None
+    assert data['history']['last_turn_at'] is None
+    assert data['daily'] == []
+
+
+def test_history_and_totals_cover_more_than_recent_trace_page(app_env):
+    for index in range(105):
+        app_env.store.record_turn({'created_at': '2026-11-05T12:00:00Z' if index == 0 else '2026-11-06T12:00:00Z', 'skills': [], 'usage': {}})
+    data = app_env.client.get('/api/usage').json()
+    assert len(data['traces']) == 100
+    assert data['summary']['turns'] == data['history']['retained_turns'] == 105
+    assert data['history']['first_turn_at'] == '2026-11-05T12:00:00Z'
+    assert data['history']['active_days'] == 2
+    assert sum(day['turns'] for day in data['daily']) == 105
+
+
+def test_retention_removes_oldest_turns_when_count_limit_is_reached(app_env):
+    from app.store import TURN_RETENTION_LIMIT
+    for index in range(TURN_RETENTION_LIMIT + 3):
+        app_env.store.record_turn({'created_at': '2026-11-06T12:00:00Z', 'sequence': index, 'skills': [], 'usage': {}})
+    retained = app_env.store.turns()
+    assert len(retained) == TURN_RETENTION_LIMIT
+    assert retained[0]['sequence'] == TURN_RETENTION_LIMIT + 2
+    assert retained[-1]['sequence'] == 3
+    assert app_env.client.get('/api/usage').json()['history']['retained_turns'] == TURN_RETENTION_LIMIT
+
+
 def test_skill_allocations_preserve_measured_turn_totals(app_env, tmp_path):
     first = app_env.skill
     second = skill_fixture(tmp_path, 'skillscentral-second-policy', 'Second policy')

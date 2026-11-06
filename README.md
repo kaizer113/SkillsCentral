@@ -36,7 +36,7 @@ Use the in-app Demo guide and [presenter runbook](demo/runbook.md). The central 
 ## What the evidence means
 
 - Skill bundles and retail records are fictional. The three source repositories are local fixtures; `.github/workflows` contains examples for connecting real GitHub repositories.
-- Usage starts at zero and comes from actual app turns. A use means a discovered skill was loaded into the model context; discovery alone is counted separately. This is application reporting, not a native Playbooks analytics dashboard.
+- Usage comes from actual app turns. A use counts a full published-procedure load recorded for a turn; previews or later failures can still have a load. Discovery is counted separately. This is application reporting, not a native Playbooks analytics dashboard. [The usage and cost flow](docs/usage-and-cost.md) explains the callers, Redis keys, retention, and daily chart.
 - Tokens come from the model response. Cost uses illustrative configured input/output rates (defaults $1/$5 per million tokens), allocated equally across loaded skills. It excludes Iris service/tool charges and is not provider billing.
 - A sufficiently confident approved FAQ is returned without a model call. Uncovered requests do not fabricate a policy. Router or memory outages are shown explicitly; Playbooks failures stop governed answering.
 - When the agent fetches a fictional return order, the app calculates eligibility using the numeric window in the loaded published procedure. It returns that deterministic assessment without a second model call. This avoids relying on the model to compare purchase age with the policy window.

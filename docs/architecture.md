@@ -205,7 +205,7 @@ The store maintains only application-owned keys beneath the required `SkillsCent
 
 A shared Redis connection pool uses explicit connection/read timeouts. Independent batched writes use non-transactional pipelines. This is a small demo state model, not a distributed publication coordinator: the process-local mutation lock serializes this application's lifecycle controls, while Playbooks remains the serving authority.
 
-The Usage & cost page aggregates retained turn records. It distinguishes a discovery hit from a loaded procedure. Its “use” count means the skill was loaded into model context; it does not prove the model followed the procedure or that a business action succeeded. Zero-use and withdrawn entries remain visible for governance review. Totals reflect the retained evidence window, not guaranteed lifetime usage.
+The Usage & cost page aggregates retained turn records. It distinguishes a discovery hit from a full published-procedure load recorded for a turn. Previews or later failures can still have a load; the count does not prove successful model execution or a business action. Zero-use and withdrawn entries remain visible for governance review. Totals reflect the retained evidence window, not guaranteed lifetime usage. The [dedicated usage and cost architecture](usage-and-cost.md) details the runtime capture path, dashboard reads, UTC grouping, and retention.
 
 Model input/output totals come from the generation response, summed across rounds. Output includes returned candidate tokens and reported thought tokens. The app computes an illustrative turn estimate:
 

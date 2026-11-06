@@ -24,7 +24,7 @@ from redis.exceptions import RedisError
 from redis_iris import lens
 
 from app.integrations import IrisIntegrationError, IrisServices, _package
-from app.store import Store, now
+from app.store import Store, now, TURN_RETENTION_LIMIT
 from app.retail_mcp import retail_mcp, retail_mcp_app
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -108,7 +108,42 @@ def usage_data():
     rows = sorted(by_skill.values(), key=lambda x: (-x['uses'], x['name']))
     total_in = sum(t.get('usage', {}).get('input_tokens', 0) for t in turns)
     total_out = sum(t.get('usage', {}).get('output_tokens', 0) for t in turns)
-    return {'summary': {'turns': len(turns), 'total_turns': len(turns), 'skill_uses': sum(r['uses'] for r in rows), 'used_skills': sum(r['uses'] > 0 for r in rows), 'unused_skills': sum(r['uses'] == 0 for r in rows), 'input_tokens': total_in, 'output_tokens': total_out, 'total_tokens': total_in + total_out, 'estimated_cost': sum(t.get('usage', {}).get('estimated_cost', 0) for t in turns), 'faq_hits': sum(t.get('mode') == 'approved_faq' for t in turns), 'synthetic': False}, 'skills': rows, 'traces': turns[:100], 'daily': sorted(daily.values(), key=lambda p: p['date']), 'methodology': 'Live application evidence. A use means the published skill was loaded into the prompt. Turn model cost is allocated equally across loaded skills. Discovery alone is not use. Costs use illustrative configured rates, not provider billing; Iris service charges and business-tool costs are excluded.', 'rates': {'input_per_million': float(os.getenv('DEMO_INPUT_USD_PER_MILLION', '1')), 'output_per_million': float(os.getenv('DEMO_OUTPUT_USD_PER_MILLION', '5')), 'basis': 'illustrative configurable demo rates; not a provider price quote'}}
+    timestamps = [t['created_at'] for t in turns]
+    return {
+        'summary': {
+            'turns': len(turns), 'total_turns': len(turns),
+            'skill_uses': sum(r['uses'] for r in rows),
+            'used_skills': sum(r['uses'] > 0 for r in rows),
+            'unused_skills': sum(r['uses'] == 0 for r in rows),
+            'input_tokens': total_in, 'output_tokens': total_out,
+            'total_tokens': total_in + total_out,
+            'estimated_cost': sum(t.get('usage', {}).get('estimated_cost', 0) for t in turns),
+            'faq_hits': sum(t.get('mode') == 'approved_faq' for t in turns),
+            'synthetic': False,
+        },
+        'skills': rows, 'traces': turns[:100],
+        'daily': sorted(daily.values(), key=lambda p: p['date']),
+        'history': {
+            'timezone': 'UTC', 'retained_turns': len(turns),
+            'retention_limit': TURN_RETENTION_LIMIT,
+            'first_turn_at': min(timestamps, default=None),
+            'last_turn_at': max(timestamps, default=None),
+            'active_days': len(daily), 'chart_active_day_limit': 14,
+            'has_expiration': False,
+        },
+        'storage': {
+            'product': 'Redis Cloud', 'key': store.key('turns'),
+            'data_type': 'list', 'writer': 'FastAPI agent turn',
+            'reader': '/api/usage', 'write_commands': ['LPUSH', 'LTRIM'],
+            'read_command': 'LRANGE',
+        },
+        'methodology': 'Live application evidence. A use counts a full published-procedure load recorded for a turn, including previews or later failures. It does not prove successful model execution. Turn model cost is allocated equally across loaded skills. Discovery alone is not use. Costs use illustrative configured rates, not provider billing; Iris service charges and business-tool costs are excluded.',
+        'rates': {
+            'input_per_million': float(os.getenv('DEMO_INPUT_USD_PER_MILLION', '1')),
+            'output_per_million': float(os.getenv('DEMO_OUTPUT_USD_PER_MILLION', '5')),
+            'basis': 'illustrative configurable demo rates; not a provider price quote',
+        },
+    }
 
 
 @app.get('/api/usage')
