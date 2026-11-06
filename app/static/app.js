@@ -87,7 +87,7 @@ function usageFlowDetails(data){
           el('ol',{class:'usage-flow-steps'},
             usageFlowStep('1','Capture the execution','The Lens SDK sends one trace per user message to the Lens service, linking Iris operations and our instrumented Gemini calls to the session and user.','source'),
             usageFlowStep('2','Assemble the story','The service stores the trace in Redis and assembles its steps into a turn: retrievals, tool calls, model tokens, timing, and outcome.','layers'),
-            usageFlowStep('3','Find why an answer went wrong','Select SkillsCentral → session → turn in Lens, or query its Read API. Inspect fetched versus used context, slow steps, and repeated model calls. Prompts and responses appear when capture is enabled.','eye')
+            usageFlowStep('3','Find why an answer went wrong','The separate Lens UI and Read API help inspect fetched versus used context, slow steps, and model calls. SkillsCentral shows application execution steps and the trace ID; it does not embed the Lens viewer.','eye')
           )
         ),
         el('section',{class:'usage-path dashboard'},el('div',{class:'usage-path-header'},el('span',{class:'usage-path-letter'},icon('chart')),el('div',{},el('h3',{},'This dashboard · Summarize activity'),el('p',{},'Agent → application records in Redis → usage totals'))),
