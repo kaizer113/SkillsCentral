@@ -1,0 +1,8 @@
+{
+  "entryKey": "skillscentral-faq-refund-tracking",
+  "question": "Where can I find the status of an existing refund?",
+  "answer": "For this fictional demo, check the refund stage shown in your order history. If no refund is listed, contact the support team with your order reference. This demo cannot access your order or confirm when funds will reach your bank.",
+  "attributes": {
+    "demo": "SkillsCentral"
+  }
+}

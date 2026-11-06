@@ -1,0 +1,16 @@
+{
+  "intents": [
+    "Store pickup handoff",
+    "Prepare a fictional store-pickup checklist from a supplied ready-for-pickup notice, order reference, and pickup person."
+  ],
+  "attributes": {
+    "demo": "SkillsCentral",
+    "source": "retail-operations",
+    "category": "Fulfillment"
+  },
+  "metadata": {
+    "owner": "Store Operations",
+    "fictional": true,
+    "sourceType": "local-repository-fixture"
+  }
+}

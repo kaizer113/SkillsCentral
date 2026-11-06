@@ -1,0 +1,16 @@
+{
+  "intents": [
+    "Delivery exception triage",
+    "Triage a delayed, missing, or delivered-but-not-received parcel from customer-supplied tracking details and delivery time."
+  ],
+  "attributes": {
+    "demo": "SkillsCentral",
+    "source": "retail-operations",
+    "category": "Delivery"
+  },
+  "metadata": {
+    "owner": "Fulfillment Operations",
+    "fictional": true,
+    "sourceType": "local-repository-fixture"
+  }
+}

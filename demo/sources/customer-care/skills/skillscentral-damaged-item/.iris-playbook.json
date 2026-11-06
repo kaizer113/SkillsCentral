@@ -1,0 +1,16 @@
+{
+  "intents": [
+    "Damaged item intake",
+    "Collect the minimum information needed to review a damaged item received by a customer."
+  ],
+  "attributes": {
+    "demo": "SkillsCentral",
+    "source": "customer-care",
+    "category": "Customer Care"
+  },
+  "metadata": {
+    "owner": "Customer Experience",
+    "fictional": true,
+    "sourceType": "local-repository-fixture"
+  }
+}

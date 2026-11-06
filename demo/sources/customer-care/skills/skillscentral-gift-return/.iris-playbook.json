@@ -1,0 +1,16 @@
+{
+  "intents": [
+    "Gift return intake",
+    "Draft a specialist-review request for a fictional gift return using gift receipt availability and item condition."
+  ],
+  "attributes": {
+    "demo": "SkillsCentral",
+    "source": "customer-care",
+    "category": "Returns"
+  },
+  "metadata": {
+    "owner": "Customer Experience",
+    "fictional": true,
+    "sourceType": "local-repository-fixture"
+  }
+}

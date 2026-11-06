@@ -1,0 +1,16 @@
+{
+  "intents": [
+    "Service recovery brief",
+    "Summarize a fictional multi-contact service issue into a specialist handoff using only facts provided in the current conversation."
+  ],
+  "attributes": {
+    "demo": "SkillsCentral",
+    "source": "agent-lab",
+    "category": "Escalation"
+  },
+  "metadata": {
+    "owner": "AI Platform",
+    "fictional": true,
+    "sourceType": "local-repository-fixture"
+  }
+}

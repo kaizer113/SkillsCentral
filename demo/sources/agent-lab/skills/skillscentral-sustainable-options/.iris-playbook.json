@@ -1,0 +1,16 @@
+{
+  "intents": [
+    "Product materials comparison",
+    "Prepare a materials comparison from customer-provided product labels without inventing sustainability certifications."
+  ],
+  "attributes": {
+    "demo": "SkillsCentral",
+    "source": "agent-lab",
+    "category": "Product Guidance"
+  },
+  "metadata": {
+    "owner": "AI Platform",
+    "fictional": true,
+    "sourceType": "local-repository-fixture"
+  }
+}

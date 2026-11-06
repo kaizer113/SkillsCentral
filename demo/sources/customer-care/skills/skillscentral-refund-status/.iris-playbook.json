@@ -1,0 +1,16 @@
+{
+  "intents": [
+    "Refund status explanation",
+    "Draft a refund-status reply from a customer-provided refund stage. Use for an existing refund, not for a new return eligibility decision."
+  ],
+  "attributes": {
+    "demo": "SkillsCentral",
+    "source": "customer-care",
+    "category": "Returns"
+  },
+  "metadata": {
+    "owner": "Payments Support",
+    "fictional": true,
+    "sourceType": "local-repository-fixture"
+  }
+}

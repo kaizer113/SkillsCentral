@@ -1,0 +1,45 @@
+name: Publish an exact reviewed skill version
+
+on:
+  workflow_dispatch:
+    inputs:
+      entry:
+        description: 'Exact SkillsCentral skill key (for example skillscentral-return-authorization)'
+        required: true
+        type: string
+      version:
+        description: 'Exact numeric version to publish; an older version performs a rollback'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: playbook-publication
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      IRIS_AGENT_PLAYBOOKS_URL: ${{ vars.IRIS_AGENT_PLAYBOOKS_URL }}
+      IRIS_AGENT_PLAYBOOKS_PLAYBOOK_ID: ${{ vars.IRIS_AGENT_PLAYBOOKS_PLAYBOOK_ID }}
+      IRIS_AGENT_PLAYBOOKS_API_KEY: ${{ secrets.IRIS_AGENT_PLAYBOOKS_CONTENT_API_KEY }}
+      IRIS_AGENT_PLAYBOOKS_CONTENT_API_KEY: ${{ secrets.IRIS_AGENT_PLAYBOOKS_CONTENT_API_KEY }}
+      ENTRY: ${{ inputs.entry }}
+      VERSION: ${{ inputs.version }}
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install 'redis-iris==1.0.1'
+      - name: Restrict publication to a named demo skill and numeric version
+        shell: bash
+        run: |
+          [[ "$ENTRY" =~ ^skillscentral-[a-z0-9-]+$ ]]
+          [[ "$VERSION" =~ ^[1-9][0-9]*$ ]]
+      - name: Inspect the exact reviewed version
+        run: iris --json --no-input agent-playbooks skills show "$ENTRY" --version "$VERSION"
+      - name: Select that version for serving
+        run: iris --json --no-input agent-playbooks skills publish "$ENTRY" --version "$VERSION"

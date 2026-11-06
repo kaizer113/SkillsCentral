@@ -1,0 +1,16 @@
+{
+  "intents": [
+    "Loyalty benefits explanation",
+    "Explain a fictional loyalty benefit using the customer-supplied membership tier and approved benefit summary."
+  ],
+  "attributes": {
+    "demo": "SkillsCentral",
+    "source": "customer-care",
+    "category": "Loyalty"
+  },
+  "metadata": {
+    "owner": "Customer Experience",
+    "fictional": true,
+    "sourceType": "local-repository-fixture"
+  }
+}

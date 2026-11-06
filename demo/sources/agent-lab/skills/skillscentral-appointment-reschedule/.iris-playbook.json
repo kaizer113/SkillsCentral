@@ -1,0 +1,16 @@
+{
+  "intents": [
+    "Appointment reschedule intake",
+    "Prepare a rescheduling request using an existing appointment reference and customer-provided alternative times."
+  ],
+  "attributes": {
+    "demo": "SkillsCentral",
+    "source": "agent-lab",
+    "category": "Customer Care"
+  },
+  "metadata": {
+    "owner": "AI Platform",
+    "fictional": true,
+    "sourceType": "local-repository-fixture"
+  }
+}

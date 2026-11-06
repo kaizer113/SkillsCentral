@@ -1,0 +1,101 @@
+{
+  "synthetic": true,
+  "fictional": true,
+  "as_of": "2026-11-05T17:00:00Z",
+  "notice": "Fixed fictional SkillsCentral fixtures. These records are not real customer, order, inventory, or loyalty data.",
+  "orders": {
+    "SC-1001": {
+      "order_id": "SC-1001",
+      "customer_id": "C-1001",
+      "purchase_date": "2026-09-28",
+      "purchase_age_days_at_fixture_time": 38,
+      "status": "delivered",
+      "proof_of_purchase": true,
+      "items": [
+        {
+          "product_id": "SKU-1001",
+          "name": "Harbor wool jacket",
+          "size": "M",
+          "color": "Navy",
+          "quantity": 1,
+          "price_usd": 149.00,
+          "reported_condition": "unworn",
+          "final_sale": false,
+          "personalized": false
+        }
+      ],
+      "return_authorization": null,
+      "refund_issued": false
+    },
+    "SC-1002": {
+      "order_id": "SC-1002",
+      "customer_id": "C-1002",
+      "purchase_date": "2026-10-29",
+      "purchase_age_days_at_fixture_time": 7,
+      "status": "delivery_exception",
+      "proof_of_purchase": true,
+      "items": [
+        {
+          "product_id": "SKU-1002",
+          "name": "City weekender bag",
+          "quantity": 1,
+          "price_usd": 89.00,
+          "final_sale": false,
+          "personalized": false
+        }
+      ],
+      "tracking": {
+        "last_event": "Delivered at front entrance",
+        "last_event_at": "2026-11-04T21:00:00Z",
+        "customer_report": "Package not found"
+      },
+      "refund_issued": false
+    }
+  },
+  "inventory": {
+    "SKU-1001:SEA-01": {
+      "product_id": "SKU-1001",
+      "product_name": "Harbor wool jacket",
+      "store_id": "SEA-01",
+      "store_name": "Seattle Demo Store",
+      "size": "M",
+      "color": "Navy",
+      "available_units": 7,
+      "availability": "available",
+      "reservation_created": false
+    },
+    "SKU-1002:SEA-01": {
+      "product_id": "SKU-1002",
+      "product_name": "City weekender bag",
+      "store_id": "SEA-01",
+      "store_name": "Seattle Demo Store",
+      "color": "Sand",
+      "available_units": 0,
+      "availability": "out_of_stock",
+      "reservation_created": false
+    }
+  },
+  "loyalty_profiles": {
+    "C-1001": {
+      "customer_id": "C-1001",
+      "display_name": "Avery Example",
+      "tier": "demo premier",
+      "benefits": [
+        "Early access to selected demo events",
+        "Digital wish list",
+        "Stylist consultation request"
+      ],
+      "account_updated": false
+    },
+    "C-1002": {
+      "customer_id": "C-1002",
+      "display_name": "Jordan Example",
+      "tier": "demo member",
+      "benefits": [
+        "Early access to selected demo events",
+        "Digital wish list"
+      ],
+      "account_updated": false
+    }
+  }
+}

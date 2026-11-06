@@ -1,0 +1,148 @@
+{
+  "title": "SkillsCentral: enterprise skill governance",
+  "fictional": true,
+  "duration_minutes": 10,
+  "scenarios": [
+    {
+      "id": "consolidation",
+      "title": "One serving catalog, three authoring origins",
+      "duration": "60 seconds",
+      "view": "sources",
+      "action": "Inspect the three local source fixtures, then the skill catalog.",
+      "talk_track": "Author in your preferred tool; consolidate reviewed procedures into a serving catalog. These are local fixtures representing three authoring origins.",
+      "evidence": [
+        "Source and owner metadata",
+        "Published, draft, and withdrawn states"
+      ],
+      "boundary": "No live GitHub repository is connected by these fixtures."
+    },
+    {
+      "id": "baseline",
+      "title": "Ask the agent before a policy change",
+      "duration": "60 seconds",
+      "view": "playground",
+      "prompt": "I bought an unworn jacket 38 days ago and I have the receipt. It is not final sale or personalized. Can I return it under the fictional demo policy?",
+      "action": "Use a fresh session and confirm the published baseline contains the fictional 30-day rule. Use its actual displayed version ID.",
+      "talk_track": "The agent discovers published previews, then loads the relevant procedure.",
+      "expected": "Standard eligibility is not met under the fictional 30-day window; offer specialist review.",
+      "evidence": [
+        "Loaded skill key and version",
+        "Trace and session identifiers"
+      ],
+      "boundary": "This is an eligibility assessment, not an executed refund or return."
+    },
+    {
+      "id": "publish",
+      "title": "Publish the candidate and observe changed behavior",
+      "duration": "90 seconds",
+      "view": "catalog",
+      "skill_key": "skillscentral-return-authorization",
+      "action": "Compare the baseline and candidate, publish the reviewed 45-day candidate using its actual version ID, then repeat the baseline prompt in a fresh session.",
+      "talk_track": "Publication changes the serving procedure without redeploying the agent.",
+      "expected": "The fictional 45-day window applies once actual serving discovery returns the candidate version.",
+      "evidence": [
+        "30 \u2192 45 day diff",
+        "Actual published candidate version ID",
+        "Fresh answer from the candidate procedure"
+      ],
+      "boundary": "Inspect actual serving results; do not assume search propagation is instantaneous.",
+      "version_role": "candidate"
+    },
+    {
+      "id": "retire",
+      "title": "Withdraw a procedure while retaining history",
+      "duration": "60 seconds",
+      "view": "catalog",
+      "skill_key": "skillscentral-return-authorization",
+      "action": "Withdraw return authorization; repeat the baseline prompt in a fresh session.",
+      "talk_track": "Retirement removes content from new serving reads and keeps its audit history.",
+      "expected": "The withdrawn return procedure is not loaded; missing approved guidance is made explicit.",
+      "evidence": [
+        "Withdrawn status",
+        "Version history",
+        "No new load of the withdrawn procedure"
+      ],
+      "boundary": "Other relevant published procedures may still be discovered."
+    },
+    {
+      "id": "rollback",
+      "title": "Restore an earlier reviewed version",
+      "duration": "30 seconds",
+      "view": "catalog",
+      "skill_key": "skillscentral-return-authorization",
+      "action": "Publish the earlier reviewed 30-day baseline using its actual version ID, then inspect serving publication.",
+      "talk_track": "Rollback selects a prior version rather than editing history.",
+      "expected": "The baseline is again selected for serving.",
+      "evidence": [
+        "Actual published baseline version ID",
+        "Preserved candidate and earlier immutable history"
+      ],
+      "boundary": "The serving version must be verified by a fresh read.",
+      "version_role": "baseline"
+    },
+    {
+      "id": "gateway",
+      "title": "Use governed context with a read-only Gateway tool",
+      "duration": "90 seconds",
+      "view": "playground",
+      "prompt": "I bought an unworn jacket 38 days ago and I have the receipt. It is not final sale or personalized. Can I return it under the fictional demo policy? Please look up order SC-1001 to verify these details before assessing eligibility.",
+      "action": "Use a fresh session. Inspect runtime Gateway discovery, the actual order-tool call, current published skill version, memory steps, and one turn trace.",
+      "talk_track": "The model discovers relevant read-only tools through the existing Context Gateway and combines timestamped fictional facts with the currently published procedure.",
+      "expected": "The turn calls skillscentral__get_order for SC-1001, preserves the fictional snapshot label, and assesses the 38-day jacket using the current publication. It never issues a return or refund.",
+      "evidence": [
+        "Runtime Gateway discovery",
+        "Actual skillscentral__get_order call and fixed synthetic record",
+        "Published skill key and actual version",
+        "One trace with session/user IDs, model usage, and memory operations"
+      ],
+      "boundary": "This is a real Gateway call to a fixed fictional fixture, not live retailer data. The app enforces a read-only allowlist and bounded tool loop. Memory event recording does not prove immediate long-term promotion."
+    },
+    {
+      "id": "usage",
+      "title": "Track real turns and estimated model cost",
+      "duration": "90 seconds",
+      "view": "usage",
+      "action": "Inspect actual application and verification turns, zero-use catalog entries, and the Lens trace/session/user IDs.",
+      "talk_track": "This is application reporting over observed events; Lens traces the turn context.",
+      "evidence": [
+        "Separate discovery and full-load counts",
+        "Live-only application history; no synthetic usage seeded",
+        "Measured model-response tokens and illustrative estimation basis"
+      ],
+      "boundary": "A use means a published skill was loaded into model context. Custom reporting, not a packaged Playbooks dashboard. Turn model cost is divided equally across loaded skills using illustrative configured rates; it is not billing or proof of causal cost."
+    },
+    {
+      "id": "faq",
+      "title": "Serve an approved answer directly",
+      "duration": "45 seconds",
+      "view": "playground",
+      "prompt": "What are the demo customer support hours?",
+      "action": "Ask the approved FAQ in a fresh session.",
+      "talk_track": "A sufficient approved FAQ can avoid a generation call under the application policy.",
+      "expected": "Fictional support hours: Monday\u2013Friday, 9 a.m.\u20135 p.m. Pacific time.",
+      "evidence": [
+        "FAQ key",
+        "Approved answer",
+        "Reported fast-path mode"
+      ],
+      "boundary": "Only claim zero generation tokens if the actual turn reports no model call."
+    },
+    {
+      "id": "unknown",
+      "title": "Keep the fallback when guidance is missing",
+      "duration": "30 seconds",
+      "view": "playground",
+      "prompt": "Can you approve a corporate travel reimbursement?",
+      "action": "Ask a question outside the retail catalog.",
+      "talk_track": "The agent should identify missing approved guidance instead of inventing a policy.",
+      "expected": "No relevant approved retail procedure; request the appropriate source or specialist.",
+      "evidence": [
+        "Discovery results",
+        "No fabricated policy"
+      ],
+      "boundary": "Intent Router fallback is application behavior and must remain available on no match."
+    }
+  ],
+  "usage_history": "live_only",
+  "description": "Fictional retail procedures and records, backed by real Iris service calls, Gemini responses, and live application evidence."
+}

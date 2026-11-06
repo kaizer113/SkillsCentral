@@ -1,0 +1,523 @@
+{
+  "fictional": true,
+  "schema_version": 1,
+  "sources": [
+    {
+      "id": "retail-operations",
+      "name": "Retail Operations",
+      "type": "repository fixture",
+      "description": "Fictional approved store and fulfillment procedures. Local fixture representing a Git repository.",
+      "path": "demo/sources/retail-operations/skills",
+      "owner": "Retail Operations",
+      "origin": "GitHub-style repository fixture",
+      "branch": "main"
+    },
+    {
+      "id": "customer-care",
+      "name": "Customer Care",
+      "type": "repository fixture",
+      "description": "Fictional customer support guidance. Local fixture representing a Claude-authored skill repository.",
+      "path": "demo/sources/customer-care/skills",
+      "owner": "Customer Experience",
+      "origin": "Claude-authored repository fixture",
+      "branch": "main"
+    },
+    {
+      "id": "agent-lab",
+      "name": "Agent Lab",
+      "type": "repository fixture",
+      "description": "Fictional agent-generated skill candidates awaiting human review. Local fixture, no external repository connected.",
+      "path": "demo/sources/agent-lab/skills",
+      "owner": "AI Platform",
+      "origin": "Agent-generated repository fixture",
+      "branch": "main"
+    }
+  ],
+  "skills": [
+    {
+      "key": "skillscentral-return-authorization",
+      "name": "Return authorization",
+      "description": "Assess a fictional merchandise return using purchase age, condition, proof of purchase, and item exclusions. Use when a customer asks to return an item or asks whether a purchase is eligible.",
+      "source": "retail-operations",
+      "owner": "Retail Policy",
+      "category": "Returns",
+      "status": "published",
+      "version": 2,
+      "published_version": 1,
+      "tags": [
+        "policy",
+        "customer-facing",
+        "versioned"
+      ],
+      "content": "---\nname: skillscentral-return-authorization\ndescription: Assess a fictional merchandise return using purchase age, condition, proof of purchase, and item exclusions. Use when a customer asks to return an item or asks whether a purchase is eligible.\n---\n\n# Return authorization\n\nFictional SkillsCentral demonstration procedure. This is not a real retailer policy.\n\n1. Ask for order reference, purchase age in days, item condition, and proof of purchase. Do not infer missing eligibility details.\n2. The fictional return window is 45 calendar days from purchase. An unworn item with proof of purchase is eligible for review within that window. Final-sale and personalized items require a specialist.\n3. For an item outside the return window, explain that standard eligibility is not met and offer specialist review. Do not invent an exception.\n4. Give a concise eligibility explanation and the next information the customer should provide. Describe this as an assessment, not an issued return authorization.\n\nCompletion: deliver guidance or a handoff only. Do not claim that a business-system action occurred.\n",
+      "versions": [
+        {
+          "version": 1,
+          "content": "---\nname: skillscentral-return-authorization\ndescription: Assess a fictional merchandise return using purchase age, condition, proof of purchase, and item exclusions. Use when a customer asks to return an item or asks whether a purchase is eligible.\n---\n\n# Return authorization\n\nFictional SkillsCentral demonstration procedure. This is not a real retailer policy.\n\n1. Ask for order reference, purchase age in days, item condition, and proof of purchase. Do not infer missing eligibility details.\n2. The fictional return window is 30 calendar days from purchase. An unworn item with proof of purchase is eligible for review within that window. Final-sale and personalized items require a specialist.\n3. For an item outside the return window, explain that standard eligibility is not met and offer specialist review. Do not invent an exception.\n4. Give a concise eligibility explanation and the next information the customer should provide. Describe this as an assessment, not an issued return authorization.\n\nCompletion: deliver guidance or a handoff only. Do not claim that a business-system action occurred.\n",
+          "status": "published",
+          "created_at": "2026-11-02T17:00:00Z",
+          "change_summary": "Initial reviewed demo procedure"
+        },
+        {
+          "version": 2,
+          "content": "---\nname: skillscentral-return-authorization\ndescription: Assess a fictional merchandise return using purchase age, condition, proof of purchase, and item exclusions. Use when a customer asks to return an item or asks whether a purchase is eligible.\n---\n\n# Return authorization\n\nFictional SkillsCentral demonstration procedure. This is not a real retailer policy.\n\n1. Ask for order reference, purchase age in days, item condition, and proof of purchase. Do not infer missing eligibility details.\n2. The fictional return window is 45 calendar days from purchase. An unworn item with proof of purchase is eligible for review within that window. Final-sale and personalized items require a specialist.\n3. For an item outside the return window, explain that standard eligibility is not met and offer specialist review. Do not invent an exception.\n4. Give a concise eligibility explanation and the next information the customer should provide. Describe this as an assessment, not an issued return authorization.\n\nCompletion: deliver guidance or a handoff only. Do not claim that a business-system action occurred.\n",
+          "status": "draft",
+          "created_at": "2026-11-05T18:00:00Z",
+          "change_summary": "Proposed fictional return window: 30 \u2192 45 days; publication remains v1"
+        }
+      ],
+      "path": "demo/sources/retail-operations/skills/skillscentral-return-authorization",
+      "origin": "local fixture",
+      "fictional": true,
+      "created_at": "2026-11-02T17:00:00Z",
+      "updated_at": "2026-11-05T18:00:00Z",
+      "intents": [
+        "I bought an unworn jacket 38 days ago and I have the receipt. It is not final sale or personalized. Can I return it under the fictional demo policy?",
+        "Can I return a coat?",
+        "I bought a coat 40 days ago. It is unworn and I have the receipt. Can I return it?",
+        "Is my unworn purchase eligible for a return with a receipt?",
+        "I want to return a jacket purchased thirty-eight days ago."
+      ]
+    },
+    {
+      "key": "skillscentral-inventory-lookup",
+      "name": "Store inventory guidance",
+      "description": "Guide a store-availability request using a customer-provided product, size, color, and store or ZIP code. Do not invent live stock availability.",
+      "source": "retail-operations",
+      "owner": "Store Operations",
+      "category": "Inventory",
+      "status": "published",
+      "version": 1,
+      "published_version": 1,
+      "tags": [
+        "inventory",
+        "store",
+        "read-only"
+      ],
+      "content": "---\nname: skillscentral-inventory-lookup\ndescription: Guide a store-availability request using a customer-provided product, size, color, and store or ZIP code. Do not invent live stock availability.\n---\n\n# Store inventory guidance\n\nFictional SkillsCentral demonstration procedure. This is not a real retailer policy.\n\n1. Collect product reference, size, color, and preferred store or ZIP code.\n2. If stock data has not been supplied, say live inventory has not been checked. Ask the associate to verify in the store system.\n3. When a supplied stock report lists availability, quote its timestamp and location, and distinguish availability from a reservation.\n4. Return the search criteria and a suggested next step. No inventory API or reservation action is connected in this demo.\n\nCompletion: deliver guidance or a handoff only. Do not claim that a business-system action occurred.\n",
+      "versions": [
+        {
+          "version": 1,
+          "content": "---\nname: skillscentral-inventory-lookup\ndescription: Guide a store-availability request using a customer-provided product, size, color, and store or ZIP code. Do not invent live stock availability.\n---\n\n# Store inventory guidance\n\nFictional SkillsCentral demonstration procedure. This is not a real retailer policy.\n\n1. Collect product reference, size, color, and preferred store or ZIP code.\n2. If stock data has not been supplied, say live inventory has not been checked. Ask the associate to verify in the store system.\n3. When a supplied stock report lists availability, quote its timestamp and location, and distinguish availability from a reservation.\n4. Return the search criteria and a suggested next step. No inventory API or reservation action is connected in this demo.\n\nCompletion: deliver guidance or a handoff only. Do not claim that a business-system action occurred.\n",
+          "status": "published",
+          "created_at": "2026-11-02T17:00:00Z",
+          "change_summary": "Initial reviewed demo procedure"
+        }
+      ],
+      "path": "demo/sources/retail-operations/skills/skillscentral-inventory-lookup",
+      "origin": "local fixture",
+      "fictional": true,
+      "created_at": "2026-11-02T17:00:00Z",
+      "updated_at": "2026-11-05T18:00:00Z"
+    },
+    {
+      "key": "skillscentral-delivery-exception",
+      "name": "Delivery exception triage",
+      "description": "Triage a delayed, missing, or delivered-but-not-received parcel from customer-supplied tracking details and delivery time.",
+      "source": "retail-operations",
+      "owner": "Fulfillment Operations",
+      "category": "Delivery",
+      "status": "published",
+      "version": 1,
+      "published_version": 1,
+      "tags": [
+        "fulfillment",
+        "carrier",
+        "triage"
+      ],
+      "content": "---\nname: skillscentral-delivery-exception\ndescription: Triage a delayed, missing, or delivered-but-not-received parcel from customer-supplied tracking details and delivery time.\n---\n\n# Delivery exception triage\n\nFictional SkillsCentral demonstration procedure. This is not a real retailer policy.\n\n1. Collect the order reference, last tracking event, its timestamp, and the reported delivery issue.\n2. For a delayed parcel, summarize the last supplied event and request carrier investigation. For delivered-but-not-received, ask the customer to check the delivery location and household recipients.\n3. Do not promise a refund, replacement, delivery date, or claim to contact a carrier. Escalate high-value or repeated losses for review.\n4. Produce a case summary with the missing facts and the appropriate handoff.\n\nCompletion: deliver guidance or a handoff only. Do not claim that a business-system action occurred.\n",
+      "versions": [
+        {
+          "version": 1,
+          "content": "---\nname: skillscentral-delivery-exception\ndescription: Triage a delayed, missing, or delivered-but-not-received parcel from customer-supplied tracking details and delivery time.\n---\n\n# Delivery exception triage\n\nFictional SkillsCentral demonstration procedure. This is not a real retailer policy.\n\n1. Collect the order reference, last tracking event, its timestamp, and the reported delivery issue.\n2. For a delayed parcel, summarize the last supplied event and request carrier investigation. For delivered-but-not-received, ask the customer to check the delivery location and household recipients.\n3. Do not promise a refund, replacement, delivery date, or claim to contact a carrier. Escalate high-value or repeated losses for review.\n4. Produce a case summary with the missing facts and the appropriate handoff.\n\nCompletion: deliver guidance or a handoff only. Do not claim that a business-system action occurred.\n",
+          "status": "published",
+          "created_at": "2026-11-02T17:00:00Z",
+          "change_summary": "Initial reviewed demo procedure"
+        }
+      ],
+      "path": "demo/sources/retail-operations/skills/skillscentral-delivery-exception",
+      "origin": "local fixture",
+      "fictional": true,
+      "created_at": "2026-11-02T17:00:00Z",
+      "updated_at": "2026-11-05T18:00:00Z"
+    },
+    {
+      "key": "skillscentral-pickup-handoff",
+      "name": "Store pickup handoff",
+      "description": "Prepare a fictional store-pickup checklist from a supplied ready-for-pickup notice, order reference, and pickup person.",
+      "source": "retail-operations",
+      "owner": "Store Operations",
+      "category": "Fulfillment",
+      "status": "published",
+      "version": 1,
+      "published_version": 1,
+      "tags": [
+        "pickup",
+        "checklist"
+      ],
+      "content": "---\nname: skillscentral-pickup-handoff\ndescription: Prepare a fictional store-pickup checklist from a supplied ready-for-pickup notice, order reference, and pickup person.\n---\n\n# Store pickup handoff\n\nFictional SkillsCentral demonstration procedure. This is not a real retailer policy.\n\n1. Confirm the customer has a ready-for-pickup notice and collect the order reference and store.\n2. Explain that the pickup associate needs the notice and an identity check according to the store process. Do not request full identity-document numbers in chat.\n3. If another person will collect the order, ask the customer to confirm authorization through the store channel.\n4. Return a checklist. Do not mark an order collected or change fulfillment state.\n\nCompletion: deliver guidance or a handoff only. Do not claim that a business-system action occurred.\n",
+      "versions": [
+        {
+          "version": 1,
+          "content": "---\nname: skillscentral-pickup-handoff\ndescription: Prepare a fictional store-pickup checklist from a supplied ready-for-pickup notice, order reference, and pickup person.\n---\n\n# Store pickup handoff\n\nFictional SkillsCentral demonstration procedure. This is not a real retailer policy.\n\n1. Confirm the customer has a ready-for-pickup notice and collect the order reference and store.\n2. Explain that the pickup associate needs the notice and an identity check according to the store process. Do not request full identity-document numbers in chat.\n3. If another person will collect the order, ask the customer to confirm authorization through the store channel.\n4. Return a checklist. Do not mark an order collected or change fulfillment state.\n\nCompletion: deliver guidance or a handoff only. Do not claim that a business-system action occurred.\n",
+          "status": "published",
+          "created_at": "2026-11-02T17:00:00Z",
+          "change_summary": "Initial reviewed demo procedure"
+        }
+      ],
+      "path": "demo/sources/retail-operations/skills/skillscentral-pickup-handoff",
+      "origin": "local fixture",
+      "fictional": true,
+      "created_at": "2026-11-02T17:00:00Z",
+      "updated_at": "2026-11-05T18:00:00Z"
+    },
+    {
+      "key": "skillscentral-legacy-auto-refund",
+      "name": "Legacy automatic refund",
+      "description": "Retired fictional procedure that previously suggested automatic refunds for delivery complaints. It must not be served to agents.",
+      "source": "retail-operations",
+      "owner": "Retail Policy",
+      "category": "Returns",
+      "status": "withdrawn",
+      "version": 1,
+      "published_version": null,
+      "tags": [
+        "retired",
+        "superseded"
+      ],
+      "content": "---\nname: skillscentral-legacy-auto-refund\ndescription: Retired fictional procedure that previously suggested automatic refunds for delivery complaints. It must not be served to agents.\n---\n\n# Legacy automatic refund\n\nFictional SkillsCentral demonstration procedure. This is not a real retailer policy.\n\n1. This procedure is retired. Do not use it to decide or issue a refund.\n2. Use an actively published return-authorization or delivery-exception procedure when appropriate.\n3. If no current procedure is discoverable, escalate to a specialist rather than recreating the legacy behavior.\n\nCompletion: deliver guidance or a handoff only. Do not claim that a business-system action occurred.\n",
+      "versions": [
+        {
+          "version": 1,
+          "content": "---\nname: skillscentral-legacy-auto-refund\ndescription: Retired fictional procedure that previously suggested automatic refunds for delivery complaints. It must not be served to agents.\n---\n\n# Legacy automatic refund\n\nFictional SkillsCentral demonstration procedure. This is not a real retailer policy.\n\n1. This procedure is retired. Do not use it to decide or issue a refund.\n2. Use an actively published return-authorization or delivery-exception procedure when appropriate.\n3. If no current procedure is discoverable, escalate to a specialist rather than recreating the legacy behavior.\n\nCompletion: deliver guidance or a handoff only. Do not claim that a business-system action occurred.\n",
+          "status": "withdrawn",
+          "created_at": "2026-11-02T17:00:00Z",
+          "change_summary": "Initial demo candidate"
+        }
+      ],
+      "path": "demo/sources/retail-operations/skills/skillscentral-legacy-auto-refund",
+      "origin": "local fixture",
+      "fictional": true,
+      "created_at": "2026-11-02T17:00:00Z",
+      "updated_at": "2026-11-05T18:00:00Z"
+    },
+    {
+      "key": "skillscentral-loyalty-benefits",
+      "name": "Loyalty benefits explanation",
+      "description": "Explain a fictional loyalty benefit using the customer-supplied membership tier and approved benefit summary.",
+      "source": "customer-care",
+      "owner": "Customer Experience",
+      "category": "Loyalty",
+      "status": "published",
+      "version": 1,
+      "published_version": 1,
+      "tags": [
+        "loyalty",
+        "approved-guidance"
+      ],
+      "content": "---\nname: skillscentral-loyalty-benefits\ndescription: Explain a fictional loyalty benefit using the customer-supplied membership tier and approved benefit summary.\n---\n\n# Loyalty benefits explanation\n\nFictional SkillsCentral demonstration procedure. This is not a real retailer policy.\n\n1. Ask which fictional membership tier the customer is asking about.\n2. For demo members, the illustrative benefits are early access to selected events and a digital wish list. For demo premier members, add a stylist consultation request. These benefits are fictional.\n3. Do not invent points balances, spending thresholds, monetary credits, or real retailer benefits.\n4. Summarize the relevant illustrative benefit and offer a specialist handoff for account-specific questions.\n\nCompletion: deliver guidance or a handoff only. Do not claim that a business-system action occurred.\n",
+      "versions": [
+        {
+          "version": 1,
+          "content": "---\nname: skillscentral-loyalty-benefits\ndescription: Explain a fictional loyalty benefit using the customer-supplied membership tier and approved benefit summary.\n---\n\n# Loyalty benefits explanation\n\nFictional SkillsCentral demonstration procedure. This is not a real retailer policy.\n\n1. Ask which fictional membership tier the customer is asking about.\n2. For demo members, the illustrative benefits are early access to selected events and a digital wish list. For demo premier members, add a stylist consultation request. These benefits are fictional.\n3. Do not invent points balances, spending thresholds, monetary credits, or real retailer benefits.\n4. Summarize the relevant illustrative benefit and offer a specialist handoff for account-specific questions.\n\nCompletion: deliver guidance or a handoff only. Do not claim that a business-system action occurred.\n",
+          "status": "published",
+          "created_at": "2026-11-02T17:00:00Z",
+          "change_summary": "Initial reviewed demo procedure"
+        }
+      ],
+      "path": "demo/sources/customer-care/skills/skillscentral-loyalty-benefits",
+      "origin": "local fixture",
+      "fictional": true,
+      "created_at": "2026-11-02T17:00:00Z",
+      "updated_at": "2026-11-05T18:00:00Z"
+    },
+    {
+      "key": "skillscentral-damaged-item",
+      "name": "Damaged item intake",
+      "description": "Collect the minimum information needed to review a damaged item received by a customer.",
+      "source": "customer-care",
+      "owner": "Customer Experience",
+      "category": "Customer Care",
+      "status": "published",
+      "version": 1,
+      "published_version": 1,
+      "tags": [
+        "damage",
+        "case-intake"
+      ],
+      "content": "---\nname: skillscentral-damaged-item\ndescription: Collect the minimum information needed to review a damaged item received by a customer.\n---\n\n# Damaged item intake\n\nFictional SkillsCentral demonstration procedure. This is not a real retailer policy.\n\n1. Ask for the order reference, item, date received, and a brief description of the damage.\n2. Suggest preserving packaging and photos for the support case; do not request photos through a channel that has no attachment capability.\n3. If the customer reports an immediate physical hazard, advise avoiding use and arranging specialist support.\n4. Draft a factual support summary without promising compensation or claiming a case has been created.\n\nCompletion: deliver guidance or a handoff only. Do not claim that a business-system action occurred.\n",
+      "versions": [
+        {
+          "version": 1,
+          "content": "---\nname: skillscentral-damaged-item\ndescription: Collect the minimum information needed to review a damaged item received by a customer.\n---\n\n# Damaged item intake\n\nFictional SkillsCentral demonstration procedure. This is not a real retailer policy.\n\n1. Ask for the order reference, item, date received, and a brief description of the damage.\n2. Suggest preserving packaging and photos for the support case; do not request photos through a channel that has no attachment capability.\n3. If the customer reports an immediate physical hazard, advise avoiding use and arranging specialist support.\n4. Draft a factual support summary without promising compensation or claiming a case has been created.\n\nCompletion: deliver guidance or a handoff only. Do not claim that a business-system action occurred.\n",
+          "status": "published",
+          "created_at": "2026-11-02T17:00:00Z",
+          "change_summary": "Initial reviewed demo procedure"
+        }
+      ],
+      "path": "demo/sources/customer-care/skills/skillscentral-damaged-item",
+      "origin": "local fixture",
+      "fictional": true,
+      "created_at": "2026-11-02T17:00:00Z",
+      "updated_at": "2026-11-05T18:00:00Z"
+    },
+    {
+      "key": "skillscentral-refund-status",
+      "name": "Refund status explanation",
+      "description": "Draft a refund-status reply from a customer-provided refund stage. Use for an existing refund, not for a new return eligibility decision.",
+      "source": "customer-care",
+      "owner": "Payments Support",
+      "category": "Returns",
+      "status": "published",
+      "version": 1,
+      "published_version": 1,
+      "tags": [
+        "refund",
+        "status",
+        "approved-guidance"
+      ],
+      "content": "---\nname: skillscentral-refund-status\ndescription: Draft a refund-status reply from a customer-provided refund stage. Use for an existing refund, not for a new return eligibility decision.\n---\n\n# Refund status explanation\n\nFictional SkillsCentral demonstration procedure. This is not a real retailer policy.\n\n1. Ask which refund stage is currently displayed if the customer has not supplied one.\n2. Use the exact customer-provided stage. For Processing, say the request is being processed; for Completed, say the displayed process is completed.\n3. Never claim to access an order system or promise a bank posting date. If no refund is listed, request specialist review with the order reference.\n4. Return a concise reply that preserves the supplied status and identifies the next step.\n\nCompletion: deliver guidance or a handoff only. Do not claim that a business-system action occurred.\n",
+      "versions": [
+        {
+          "version": 1,
+          "content": "---\nname: skillscentral-refund-status\ndescription: Draft a refund-status reply from a customer-provided refund stage. Use for an existing refund, not for a new return eligibility decision.\n---\n\n# Refund status explanation\n\nFictional SkillsCentral demonstration procedure. This is not a real retailer policy.\n\n1. Ask which refund stage is currently displayed if the customer has not supplied one.\n2. Use the exact customer-provided stage. For Processing, say the request is being processed; for Completed, say the displayed process is completed.\n3. Never claim to access an order system or promise a bank posting date. If no refund is listed, request specialist review with the order reference.\n4. Return a concise reply that preserves the supplied status and identifies the next step.\n\nCompletion: deliver guidance or a handoff only. Do not claim that a business-system action occurred.\n",
+          "status": "published",
+          "created_at": "2026-11-02T17:00:00Z",
+          "change_summary": "Initial reviewed demo procedure"
+        }
+      ],
+      "path": "demo/sources/customer-care/skills/skillscentral-refund-status",
+      "origin": "local fixture",
+      "fictional": true,
+      "created_at": "2026-11-02T17:00:00Z",
+      "updated_at": "2026-11-05T18:00:00Z"
+    },
+    {
+      "key": "skillscentral-fraud-escalation",
+      "name": "Sensitive order escalation",
+      "description": "Prepare a specialist handoff for a potentially unauthorized retail order without collecting payment secrets or making a fraud verdict.",
+      "source": "customer-care",
+      "owner": "Trust & Safety",
+      "category": "Escalation",
+      "status": "published",
+      "version": 1,
+      "published_version": 1,
+      "tags": [
+        "fraud",
+        "human-review"
+      ],
+      "content": "---\nname: skillscentral-fraud-escalation\ndescription: Prepare a specialist handoff for a potentially unauthorized retail order without collecting payment secrets or making a fraud verdict.\n---\n\n# Sensitive order escalation\n\nFictional SkillsCentral demonstration procedure. This is not a real retailer policy.\n\n1. Ask whether the customer recognizes the order and collect only a non-sensitive order reference.\n2. Do not request a full card number, security code, account password, or government identifier.\n3. If the customer reports an unrecognized order, advise contacting their payment provider through its trusted channel and the retailer specialist team.\n4. Summarize the reported concern without labeling the customer fraudulent, reversing a charge, or claiming an account was blocked.\n\nCompletion: deliver guidance or a handoff only. Do not claim that a business-system action occurred.\n",
+      "versions": [
+        {
+          "version": 1,
+          "content": "---\nname: skillscentral-fraud-escalation\ndescription: Prepare a specialist handoff for a potentially unauthorized retail order without collecting payment secrets or making a fraud verdict.\n---\n\n# Sensitive order escalation\n\nFictional SkillsCentral demonstration procedure. This is not a real retailer policy.\n\n1. Ask whether the customer recognizes the order and collect only a non-sensitive order reference.\n2. Do not request a full card number, security code, account password, or government identifier.\n3. If the customer reports an unrecognized order, advise contacting their payment provider through its trusted channel and the retailer specialist team.\n4. Summarize the reported concern without labeling the customer fraudulent, reversing a charge, or claiming an account was blocked.\n\nCompletion: deliver guidance or a handoff only. Do not claim that a business-system action occurred.\n",
+          "status": "published",
+          "created_at": "2026-11-02T17:00:00Z",
+          "change_summary": "Initial reviewed demo procedure"
+        }
+      ],
+      "path": "demo/sources/customer-care/skills/skillscentral-fraud-escalation",
+      "origin": "local fixture",
+      "fictional": true,
+      "created_at": "2026-11-02T17:00:00Z",
+      "updated_at": "2026-11-05T18:00:00Z"
+    },
+    {
+      "key": "skillscentral-gift-return",
+      "name": "Gift return intake",
+      "description": "Draft a specialist-review request for a fictional gift return using gift receipt availability and item condition.",
+      "source": "customer-care",
+      "owner": "Customer Experience",
+      "category": "Returns",
+      "status": "draft",
+      "version": 1,
+      "published_version": null,
+      "tags": [
+        "gift",
+        "awaiting-review"
+      ],
+      "content": "---\nname: skillscentral-gift-return\ndescription: Draft a specialist-review request for a fictional gift return using gift receipt availability and item condition.\n---\n\n# Gift return intake\n\nFictional SkillsCentral demonstration procedure. This is not a real retailer policy.\n\n1. Ask whether a gift receipt is available, whether the item is unused, and whether it is marked final sale.\n2. This candidate has not been approved for publication. It must not establish a new gift-return entitlement.\n3. Prepare a specialist-review summary with the supplied facts and unresolved policy questions.\n4. Do not state a refund method or reveal information about the original purchaser.\n\nCompletion: deliver guidance or a handoff only. Do not claim that a business-system action occurred.\n",
+      "versions": [
+        {
+          "version": 1,
+          "content": "---\nname: skillscentral-gift-return\ndescription: Draft a specialist-review request for a fictional gift return using gift receipt availability and item condition.\n---\n\n# Gift return intake\n\nFictional SkillsCentral demonstration procedure. This is not a real retailer policy.\n\n1. Ask whether a gift receipt is available, whether the item is unused, and whether it is marked final sale.\n2. This candidate has not been approved for publication. It must not establish a new gift-return entitlement.\n3. Prepare a specialist-review summary with the supplied facts and unresolved policy questions.\n4. Do not state a refund method or reveal information about the original purchaser.\n\nCompletion: deliver guidance or a handoff only. Do not claim that a business-system action occurred.\n",
+          "status": "draft",
+          "created_at": "2026-11-02T17:00:00Z",
+          "change_summary": "Initial demo candidate"
+        }
+      ],
+      "path": "demo/sources/customer-care/skills/skillscentral-gift-return",
+      "origin": "local fixture",
+      "fictional": true,
+      "created_at": "2026-11-02T17:00:00Z",
+      "updated_at": "2026-11-05T18:00:00Z"
+    },
+    {
+      "key": "skillscentral-size-exchange",
+      "name": "Size exchange guidance",
+      "description": "Collect a requested size exchange and compare it with a supplied return eligibility assessment and availability report.",
+      "source": "agent-lab",
+      "owner": "AI Platform",
+      "category": "Returns",
+      "status": "draft",
+      "version": 1,
+      "published_version": null,
+      "tags": [
+        "agent-generated",
+        "review-required"
+      ],
+      "content": "---\nname: skillscentral-size-exchange\ndescription: Collect a requested size exchange and compare it with a supplied return eligibility assessment and availability report.\n---\n\n# Size exchange guidance\n\nFictional SkillsCentral demonstration procedure. This is not a real retailer policy.\n\n1. Collect the current item, desired size, purchase age, and condition.\n2. This agent-generated candidate requires retail-policy review before serving. Do not create an exchange entitlement.\n3. If a current published eligibility assessment and stock report are provided, summarize them separately. Otherwise identify the missing check.\n4. Return a proposed review handoff. No exchange or inventory change is executed.\n\nCompletion: deliver guidance or a handoff only. Do not claim that a business-system action occurred.\n",
+      "versions": [
+        {
+          "version": 1,
+          "content": "---\nname: skillscentral-size-exchange\ndescription: Collect a requested size exchange and compare it with a supplied return eligibility assessment and availability report.\n---\n\n# Size exchange guidance\n\nFictional SkillsCentral demonstration procedure. This is not a real retailer policy.\n\n1. Collect the current item, desired size, purchase age, and condition.\n2. This agent-generated candidate requires retail-policy review before serving. Do not create an exchange entitlement.\n3. If a current published eligibility assessment and stock report are provided, summarize them separately. Otherwise identify the missing check.\n4. Return a proposed review handoff. No exchange or inventory change is executed.\n\nCompletion: deliver guidance or a handoff only. Do not claim that a business-system action occurred.\n",
+          "status": "draft",
+          "created_at": "2026-11-02T17:00:00Z",
+          "change_summary": "Initial demo candidate"
+        }
+      ],
+      "path": "demo/sources/agent-lab/skills/skillscentral-size-exchange",
+      "origin": "local fixture",
+      "fictional": true,
+      "created_at": "2026-11-02T17:00:00Z",
+      "updated_at": "2026-11-05T18:00:00Z"
+    },
+    {
+      "key": "skillscentral-stylist-brief",
+      "name": "Stylist appointment brief",
+      "description": "Turn a customer-supplied occasion, budget range, and style preferences into a fictional stylist handoff brief.",
+      "source": "agent-lab",
+      "owner": "AI Platform",
+      "category": "Personalization",
+      "status": "published",
+      "version": 1,
+      "published_version": 1,
+      "tags": [
+        "generated-then-reviewed",
+        "handoff"
+      ],
+      "content": "---\nname: skillscentral-stylist-brief\ndescription: Turn a customer-supplied occasion, budget range, and style preferences into a fictional stylist handoff brief.\n---\n\n# Stylist appointment brief\n\nFictional SkillsCentral demonstration procedure. This is not a real retailer policy.\n\n1. Ask for the occasion, approximate budget range, size preferences if volunteered, and preferred appointment format.\n2. Use only preferences supplied by the customer. Do not infer sensitive traits, body measurements, or spending capacity.\n3. Draft a short brief with known preferences and unanswered questions.\n4. Explain that the appointment has not been booked and a stylist must confirm availability.\n\nCompletion: deliver guidance or a handoff only. Do not claim that a business-system action occurred.\n",
+      "versions": [
+        {
+          "version": 1,
+          "content": "---\nname: skillscentral-stylist-brief\ndescription: Turn a customer-supplied occasion, budget range, and style preferences into a fictional stylist handoff brief.\n---\n\n# Stylist appointment brief\n\nFictional SkillsCentral demonstration procedure. This is not a real retailer policy.\n\n1. Ask for the occasion, approximate budget range, size preferences if volunteered, and preferred appointment format.\n2. Use only preferences supplied by the customer. Do not infer sensitive traits, body measurements, or spending capacity.\n3. Draft a short brief with known preferences and unanswered questions.\n4. Explain that the appointment has not been booked and a stylist must confirm availability.\n\nCompletion: deliver guidance or a handoff only. Do not claim that a business-system action occurred.\n",
+          "status": "published",
+          "created_at": "2026-11-02T17:00:00Z",
+          "change_summary": "Initial reviewed demo procedure"
+        }
+      ],
+      "path": "demo/sources/agent-lab/skills/skillscentral-stylist-brief",
+      "origin": "local fixture",
+      "fictional": true,
+      "created_at": "2026-11-02T17:00:00Z",
+      "updated_at": "2026-11-05T18:00:00Z"
+    },
+    {
+      "key": "skillscentral-sustainable-options",
+      "name": "Product materials comparison",
+      "description": "Prepare a materials comparison from customer-provided product labels without inventing sustainability certifications.",
+      "source": "agent-lab",
+      "owner": "AI Platform",
+      "category": "Product Guidance",
+      "status": "draft",
+      "version": 1,
+      "published_version": null,
+      "tags": [
+        "agent-generated",
+        "claims-review"
+      ],
+      "content": "---\nname: skillscentral-sustainable-options\ndescription: Prepare a materials comparison from customer-provided product labels without inventing sustainability certifications.\n---\n\n# Product materials comparison\n\nFictional SkillsCentral demonstration procedure. This is not a real retailer policy.\n\n1. Ask for the product labels or supplied materials information to compare.\n2. This candidate is awaiting review. Do not make sustainability claims based on a product name or appearance.\n3. Separate facts printed in supplied labels from unverified claims. Do not invent certifications, emissions values, or environmental scores.\n4. Return a draft comparison and list the source information still needed.\n\nCompletion: deliver guidance or a handoff only. Do not claim that a business-system action occurred.\n",
+      "versions": [
+        {
+          "version": 1,
+          "content": "---\nname: skillscentral-sustainable-options\ndescription: Prepare a materials comparison from customer-provided product labels without inventing sustainability certifications.\n---\n\n# Product materials comparison\n\nFictional SkillsCentral demonstration procedure. This is not a real retailer policy.\n\n1. Ask for the product labels or supplied materials information to compare.\n2. This candidate is awaiting review. Do not make sustainability claims based on a product name or appearance.\n3. Separate facts printed in supplied labels from unverified claims. Do not invent certifications, emissions values, or environmental scores.\n4. Return a draft comparison and list the source information still needed.\n\nCompletion: deliver guidance or a handoff only. Do not claim that a business-system action occurred.\n",
+          "status": "draft",
+          "created_at": "2026-11-02T17:00:00Z",
+          "change_summary": "Initial demo candidate"
+        }
+      ],
+      "path": "demo/sources/agent-lab/skills/skillscentral-sustainable-options",
+      "origin": "local fixture",
+      "fictional": true,
+      "created_at": "2026-11-02T17:00:00Z",
+      "updated_at": "2026-11-05T18:00:00Z"
+    },
+    {
+      "key": "skillscentral-appointment-reschedule",
+      "name": "Appointment reschedule intake",
+      "description": "Prepare a rescheduling request using an existing appointment reference and customer-provided alternative times.",
+      "source": "agent-lab",
+      "owner": "AI Platform",
+      "category": "Customer Care",
+      "status": "draft",
+      "version": 1,
+      "published_version": null,
+      "tags": [
+        "agent-generated",
+        "appointments"
+      ],
+      "content": "---\nname: skillscentral-appointment-reschedule\ndescription: Prepare a rescheduling request using an existing appointment reference and customer-provided alternative times.\n---\n\n# Appointment reschedule intake\n\nFictional SkillsCentral demonstration procedure. This is not a real retailer policy.\n\n1. Collect the appointment reference, store or channel, and preferred alternative dates with timezone.\n2. Do not claim to read a calendar or confirm availability.\n3. Preserve any accessibility preferences the customer explicitly gives and omit unrelated personal details.\n4. Return a concise request for the scheduling team; do not claim the appointment changed.\n\nCompletion: deliver guidance or a handoff only. Do not claim that a business-system action occurred.\n",
+      "versions": [
+        {
+          "version": 1,
+          "content": "---\nname: skillscentral-appointment-reschedule\ndescription: Prepare a rescheduling request using an existing appointment reference and customer-provided alternative times.\n---\n\n# Appointment reschedule intake\n\nFictional SkillsCentral demonstration procedure. This is not a real retailer policy.\n\n1. Collect the appointment reference, store or channel, and preferred alternative dates with timezone.\n2. Do not claim to read a calendar or confirm availability.\n3. Preserve any accessibility preferences the customer explicitly gives and omit unrelated personal details.\n4. Return a concise request for the scheduling team; do not claim the appointment changed.\n\nCompletion: deliver guidance or a handoff only. Do not claim that a business-system action occurred.\n",
+          "status": "draft",
+          "created_at": "2026-11-02T17:00:00Z",
+          "change_summary": "Initial demo candidate"
+        }
+      ],
+      "path": "demo/sources/agent-lab/skills/skillscentral-appointment-reschedule",
+      "origin": "local fixture",
+      "fictional": true,
+      "created_at": "2026-11-02T17:00:00Z",
+      "updated_at": "2026-11-05T18:00:00Z"
+    },
+    {
+      "key": "skillscentral-service-recovery-brief",
+      "name": "Service recovery brief",
+      "description": "Summarize a fictional multi-contact service issue into a specialist handoff using only facts provided in the current conversation.",
+      "source": "agent-lab",
+      "owner": "AI Platform",
+      "category": "Escalation",
+      "status": "published",
+      "version": 1,
+      "published_version": 1,
+      "tags": [
+        "generated-then-reviewed",
+        "summary"
+      ],
+      "content": "---\nname: skillscentral-service-recovery-brief\ndescription: Summarize a fictional multi-contact service issue into a specialist handoff using only facts provided in the current conversation.\n---\n\n# Service recovery brief\n\nFictional SkillsCentral demonstration procedure. This is not a real retailer policy.\n\n1. Collect the issue, relevant order reference, customer-supplied timeline, and desired resolution.\n2. Separate observed statements from uncertain or missing details. Do not invent prior contacts or claim access to customer history.\n3. Keep the summary concise and do not offer unapproved compensation.\n4. Return a handoff brief with issue, supplied timeline, desired outcome, and unresolved questions.\n\nCompletion: deliver guidance or a handoff only. Do not claim that a business-system action occurred.\n",
+      "versions": [
+        {
+          "version": 1,
+          "content": "---\nname: skillscentral-service-recovery-brief\ndescription: Summarize a fictional multi-contact service issue into a specialist handoff using only facts provided in the current conversation.\n---\n\n# Service recovery brief\n\nFictional SkillsCentral demonstration procedure. This is not a real retailer policy.\n\n1. Collect the issue, relevant order reference, customer-supplied timeline, and desired resolution.\n2. Separate observed statements from uncertain or missing details. Do not invent prior contacts or claim access to customer history.\n3. Keep the summary concise and do not offer unapproved compensation.\n4. Return a handoff brief with issue, supplied timeline, desired outcome, and unresolved questions.\n\nCompletion: deliver guidance or a handoff only. Do not claim that a business-system action occurred.\n",
+          "status": "published",
+          "created_at": "2026-11-02T17:00:00Z",
+          "change_summary": "Initial reviewed demo procedure"
+        }
+      ],
+      "path": "demo/sources/agent-lab/skills/skillscentral-service-recovery-brief",
+      "origin": "local fixture",
+      "fictional": true,
+      "created_at": "2026-11-02T17:00:00Z",
+      "updated_at": "2026-11-05T18:00:00Z"
+    }
+  ],
+  "faqs": [
+    {
+      "key": "skillscentral-faq-support-hours",
+      "question": "What are the demo customer support hours?",
+      "answer": "In this fictional SkillsCentral scenario, customer support is available Monday through Friday, 9 a.m. to 5 p.m. Pacific time. These hours are illustrative and are not a real retailer service commitment."
+    },
+    {
+      "key": "skillscentral-faq-refund-tracking",
+      "question": "Where can I find the status of an existing refund?",
+      "answer": "For this fictional demo, check the refund stage shown in your order history. If no refund is listed, contact the support team with your order reference. This demo cannot access your order or confirm when funds will reach your bank."
+    },
+    {
+      "key": "skillscentral-faq-store-pickup",
+      "question": "What should I bring to collect a store pickup order?",
+      "answer": "In this fictional demo, bring your ready-for-pickup notice and order reference. The pickup associate will confirm identity using the store process. Wait for the ready notice before traveling; this demo does not check live order readiness."
+    }
+  ]
+}

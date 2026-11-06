@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1560" height="1140" viewBox="0 0 1560 1140" role="img" aria-labelledby="title desc">
+  <title id="title">SkillsCentral architecture overview</title>
+  <desc id="desc">Local authoring fixtures synchronize drafts to Agent Playbooks. A single FastAPI application serves a browser console, orchestrates governed agent turns, and exposes read-only fictional retail tools through Context Gateway. Redis stores live application evidence; Vertex AI generates responses; Iris provides routing, memory, and Lens tracing.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#8391a7"/></marker>
+    <marker id="redarrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#d93039"/></marker>
+    <style>
+      text{font-family:Arial,Helvetica,sans-serif;fill:#18243a}
+      .title{font-size:32px;font-weight:700}
+      .subtitle{font-size:18px;fill:#526178}
+      .label{font-size:16px;font-weight:700;letter-spacing:1px;fill:#657389}
+      .heading{font-size:22px;font-weight:700}
+      .body{font-size:17px;fill:#43516a}
+      .small{font-size:15px;fill:#657389}
+      .box{fill:#fff;stroke:#d9e0eb;stroke-width:1.5}
+      .line{fill:none;stroke:#8391a7;stroke-width:2;marker-end:url(#arrow)}
+      .redline{fill:none;stroke:#d93039;stroke-width:2.3;marker-end:url(#redarrow)}
+      .dash{stroke-dasharray:7 5}
+    </style>
+  </defs>
+  <rect width="1560" height="1140" fill="#f7f9fc"/>
+  <text x="40" y="57" class="title">SkillsCentral</text>
+  <text x="40" y="88" class="subtitle">Governed procedures, runtime context, and live turn evidence</text>
+
+  <text x="40" y="126" class="label">AUTHORING AND PUBLICATION</text>
+  <rect x="40" y="145" width="440" height="180" rx="14" class="box"/>
+  <text x="62" y="181" class="heading">Local source fixtures</text>
+  <text x="62" y="215" class="body">Retail operations · Support · Agent lab</text>
+  <text x="62" y="246" class="body">SKILL.md packages, FAQs, metadata</text>
+  <text x="62" y="282" class="small">Fictional procedures; source provenance preserved</text>
+
+  <rect x="540" y="145" width="440" height="180" rx="14" class="box"/>
+  <text x="562" y="181" class="heading">Iris CLI and workflow examples</text>
+  <text x="562" y="215" class="body">Validate → plan → upload drafts</text>
+  <text x="562" y="246" class="body">Exact-version publication after review</text>
+  <text x="562" y="282" class="small">GitHub Actions require repository configuration</text>
+
+  <rect x="1040" y="145" width="480" height="180" rx="14" fill="#fff4f4" stroke="#efc9cc" stroke-width="1.5"/>
+  <text x="1062" y="181" class="heading">Agent Playbooks</text>
+  <text x="1062" y="215" class="body">Drafts · immutable versions · publication</text>
+  <text x="1062" y="246" class="body">Withdraw · rollback · published discovery</text>
+  <text x="1062" y="282" class="small">Serving authority; previews before full skill loads</text>
+  <path d="M480 235 H540" class="line"/>
+  <path d="M980 235 H1040" class="redline"/>
+
+  <text x="40" y="389" class="label">LIVE APPLICATION</text>
+  <rect x="40" y="440" width="290" height="175" rx="14" class="box"/>
+  <text x="62" y="478" class="heading">Browser console</text>
+  <text x="62" y="513" class="body">Catalog and lifecycle</text>
+  <text x="62" y="543" class="body">Agent playground</text>
+  <text x="62" y="573" class="body">Usage, cost, integrations</text>
+  <path d="M330 527 H390" class="line"/>
+
+  <rect x="390" y="410" width="560" height="520" rx="18" fill="#fff" stroke="#b9c6d9" stroke-width="2"/>
+  <rect x="390" y="410" width="560" height="75" rx="18" fill="#18243a"/>
+  <rect x="390" y="454" width="560" height="31" fill="#18243a"/>
+  <text x="414" y="443" style="font-size:22px;font-weight:700;fill:white">FastAPI application · GCP us-east4</text>
+  <text x="414" y="470" style="font-size:16px;fill:#d6e0ef">One process: static UI, APIs, agent, and MCP endpoint</text>
+  <text x="414" y="524" class="heading">Governed turn orchestration</text>
+  <text x="414" y="558" class="body">Route → discover published context → load</text>
+  <text x="414" y="588" class="body">Approved FAQ or procedure-based response</text>
+  <text x="414" y="618" class="body">Memory recall and conversation recording</text>
+  <line x1="414" y1="643" x2="926" y2="643" stroke="#e3e8f0"/>
+  <text x="414" y="677" class="heading">Bounded model and tool loop</text>
+  <text x="414" y="711" class="body">Runtime discovery + read-only name allowlist</text>
+  <text x="414" y="741" class="body">At most 4 model rounds and 3 Gateway calls</text>
+  <text x="414" y="773" class="small">Fixture return path: 38 days vs published 30 / 45 days</text>
+  <rect x="414" y="801" width="512" height="104" rx="10" fill="#eef5ff" stroke="#cbdcf4"/>
+  <text x="432" y="834" class="heading">Read-only retail MCP · /mcp</text>
+  <text x="432" y="864" class="body">Order · inventory · loyalty fixture reads</text>
+  <text x="432" y="890" class="small">Fixed timestamp; synthetic and fictional labels</text>
+
+  <rect x="1020" y="410" width="500" height="520" rx="18" fill="#edf2f8" stroke="#d4deeb" stroke-width="1.5"/>
+  <text x="1042" y="442" class="label">EXISTING IRIS SERVICES · AWS USE1</text>
+  <rect x="1060" y="466" width="420" height="82" rx="10" class="box"/>
+  <text x="1080" y="499" class="heading">Intent Router</text>
+  <text x="1080" y="526" class="body">Existing intents; preserve normal fallback</text>
+  <rect x="1060" y="564" width="420" height="82" rx="10" class="box"/>
+  <text x="1080" y="597" class="heading">Agent Memory</text>
+  <text x="1080" y="624" class="body">Recall + events; asynchronous promotion</text>
+  <rect x="1060" y="662" width="420" height="104" rx="10" class="box"/>
+  <text x="1080" y="695" class="heading">Context Gateway</text>
+  <text x="1080" y="723" class="body">Search tool schemas; proxy allowed calls</text>
+  <text x="1080" y="749" class="small">Configured upstream returns to app /mcp</text>
+  <rect x="1060" y="782" width="420" height="122" rx="10" class="box"/>
+  <text x="1080" y="815" class="heading">Lens</text>
+  <text x="1080" y="843" class="body">One turn trace with user and session</text>
+  <text x="1080" y="871" class="body">Manual GenAI capture and token attributes</text>
+  <text x="1080" y="894" class="small">Observed Playbooks manifest-join limitation</text>
+
+  <path d="M950 450 H990 V305 H1040" class="redline"/>
+  <text x="761" y="389" class="small">Control operations and runtime serving</text>
+  <path d="M950 526 H1060" class="line"/>
+  <path d="M950 604 H1060" class="line"/>
+  <path d="M950 699 H1060" class="redline"/>
+  <path d="M1060 741 H995 V853 H926" class="line"/>
+  <path d="M950 894 H1060" class="line dash"/>
+
+  <rect x="40" y="735" width="290" height="195" rx="14" class="box"/>
+  <text x="62" y="773" class="heading">Redis state and evidence</text>
+  <text x="62" y="806" class="body">SkillsCentral: namespace</text>
+  <text x="62" y="838" class="body">Catalog projection and history</text>
+  <text x="62" y="868" class="body">Sessions, turns, activity</text>
+  <text x="62" y="902" class="small">Live usage; custom cost allocation</text>
+  <path d="M390 835 H330" class="line"/>
+
+  <rect x="390" y="990" width="560" height="112" rx="14" class="box"/>
+  <text x="414" y="1027" class="heading">Gemini 2.5 Flash · Vertex AI us-east4</text>
+  <text x="414" y="1059" class="body">Generation, function selection, measured model tokens</text>
+  <text x="414" y="1086" class="small">Illustrative model-cost estimate, not provider billing</text>
+  <path d="M670 930 V990" class="line"/>
+
+  <text x="1040" y="995" class="label">DEMO BOUNDARIES</text>
+  <text x="1040" y="1027" class="body">Fictional retail data; real service activity.</text>
+  <text x="1040" y="1057" class="body">No real retail writes or refund operations.</text>
+  <text x="1040" y="1087" class="body">Private endpoints and credentials via environment.</text>
+</svg>

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101b2e">
+  <meta name="description" content="An enterprise skill governance demo powered by Redis Iris.">
+  <title>SkillsCentral · Redis Iris</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="#overview" aria-label="SkillsCentral home">
+      <span class="brand-symbol" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span>SkillsCentral<small>GOVERNED BY REDIS IRIS</small></span>
+    </a>
+    <div class="workspace-label"><span class="workspace-avatar">SC</span><span>Retail workspace<small>Enterprise demo</small></span><span class="tiny-chevron">⌄</span></div>
+    <div class="nav-label">WORKSPACE</div>
+    <nav id="nav" aria-label="Main navigation"></nav>
+    <div class="sidebar-bottom">
+      <div class="sidebar-note"><span class="dot red"></span><span>One catalog. Every agent.<small>Approved context, on demand.</small></span></div>
+      <a class="sidebar-docs" href="https://redis.io/docs/latest/develop/ai/context-engine/" target="_blank" rel="noopener noreferrer">Redis Iris documentation <span>↗</span></a>
+      <div class="profile"><span class="profile-avatar">SC</span><div>Demo operator<small>Skill governance</small></div><span class="profile-status"></span></div>
+    </div>
+  </aside>
+  <div class="workspace">
+    <header class="topbar"><div class="breadcrumbs"><button id="mobile-menu" class="icon-button mobile-menu" aria-label="Toggle navigation">☰</button><span>Workspace</span><span class="breadcrumb-separator">/</span><strong id="breadcrumb">Overview</strong></div><div class="topbar-right"><button id="architecture-open" class="architecture-trigger" type="button" aria-haspopup="dialog" aria-controls="architecture-dialog" aria-expanded="false"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6v6H9z M2 16h6v6H2z M16 16h6v6h-6z M12 9v4 M5 16v-3h14v3"/></svg>Architecture<span aria-hidden="true">↗</span></button><a class="text-link" href="#demo">Demo guide <span aria-hidden="true">↗</span></a></div></header>
+    <main id="main-content" tabindex="-1"></main>
+    <footer class="page-footer"><span>SkillsCentral <span class="footer-divider">/</span> Powered by Redis Iris</span><span>Demo content · Estimated costs are not billing records</span></footer>
+  </div>
+  <div id="drawer-root"></div>
+  <div id="architecture-root"></div>
+  <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="true"></div>
+</body>
+</html>

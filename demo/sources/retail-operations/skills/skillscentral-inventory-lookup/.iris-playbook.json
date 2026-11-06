@@ -1,0 +1,16 @@
+{
+  "intents": [
+    "Store inventory guidance",
+    "Guide a store-availability request using a customer-provided product, size, color, and store or ZIP code. Do not invent live stock availability."
+  ],
+  "attributes": {
+    "demo": "SkillsCentral",
+    "source": "retail-operations",
+    "category": "Inventory"
+  },
+  "metadata": {
+    "owner": "Store Operations",
+    "fictional": true,
+    "sourceType": "local-repository-fixture"
+  }
+}

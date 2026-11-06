@@ -1,0 +1,16 @@
+{
+  "intents": [
+    "Legacy automatic refund",
+    "Retired fictional procedure that previously suggested automatic refunds for delivery complaints. It must not be served to agents."
+  ],
+  "attributes": {
+    "demo": "SkillsCentral",
+    "source": "retail-operations",
+    "category": "Returns"
+  },
+  "metadata": {
+    "owner": "Retail Policy",
+    "fictional": true,
+    "sourceType": "local-repository-fixture"
+  }
+}

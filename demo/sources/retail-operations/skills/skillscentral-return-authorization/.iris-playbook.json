@@ -1,0 +1,19 @@
+{
+  "intents": [
+    "I bought an unworn jacket 38 days ago and I have the receipt. It is not final sale or personalized. Can I return it under the fictional demo policy?",
+    "Can I return a coat?",
+    "I bought a coat 40 days ago. It is unworn and I have the receipt. Can I return it?",
+    "Is my unworn purchase eligible for a return with a receipt?",
+    "I want to return a jacket purchased thirty-eight days ago."
+  ],
+  "attributes": {
+    "demo": "SkillsCentral",
+    "source": "retail-operations",
+    "category": "Returns"
+  },
+  "metadata": {
+    "owner": "Retail Policy",
+    "fictional": true,
+    "sourceType": "local-repository-fixture"
+  }
+}

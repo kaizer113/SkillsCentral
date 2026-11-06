@@ -1,0 +1,16 @@
+{
+  "intents": [
+    "Size exchange guidance",
+    "Collect a requested size exchange and compare it with a supplied return eligibility assessment and availability report."
+  ],
+  "attributes": {
+    "demo": "SkillsCentral",
+    "source": "agent-lab",
+    "category": "Returns"
+  },
+  "metadata": {
+    "owner": "AI Platform",
+    "fictional": true,
+    "sourceType": "local-repository-fixture"
+  }
+}

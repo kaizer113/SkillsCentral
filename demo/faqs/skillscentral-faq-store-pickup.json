@@ -1,0 +1,8 @@
+{
+  "entryKey": "skillscentral-faq-store-pickup",
+  "question": "What should I bring to collect a store pickup order?",
+  "answer": "In this fictional demo, bring your ready-for-pickup notice and order reference. The pickup associate will confirm identity using the store process. Wait for the ready notice before traveling; this demo does not check live order readiness.",
+  "attributes": {
+    "demo": "SkillsCentral"
+  }
+}

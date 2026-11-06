@@ -1,0 +1,8 @@
+redis-iris[llm-tracing]==1.0.1
+fastapi==0.162.0
+uvicorn==0.54.0
+redis==8.1.0
+httpx==0.28.1
+python-dotenv==1.2.4
+google-genai==2.34.0
+mcp==2.3.0

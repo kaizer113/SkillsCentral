@@ -1,0 +1,16 @@
+{
+  "intents": [
+    "Sensitive order escalation",
+    "Prepare a specialist handoff for a potentially unauthorized retail order without collecting payment secrets or making a fraud verdict."
+  ],
+  "attributes": {
+    "demo": "SkillsCentral",
+    "source": "customer-care",
+    "category": "Escalation"
+  },
+  "metadata": {
+    "owner": "Trust & Safety",
+    "fictional": true,
+    "sourceType": "local-repository-fixture"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "intents": [
+    "Stylist appointment brief",
+    "Turn a customer-supplied occasion, budget range, and style preferences into a fictional stylist handoff brief."
+  ],
+  "attributes": {
+    "demo": "SkillsCentral",
+    "source": "agent-lab",
+    "category": "Personalization"
+  },
+  "metadata": {
+    "owner": "AI Platform",
+    "fictional": true,
+    "sourceType": "local-repository-fixture"
+  }
+}
