@@ -65,3 +65,16 @@ def test_start_checks_app_and_retained_usage(vm_control, monkeypatch, capsys):
     monkeypatch.setattr(vm_control.httpx, 'Client', lambda **kwargs: client)
     vm_control.wait_for_demo('192.0.2.10', '8084')
     assert '30 retained activity records' in capsys.readouterr().out
+
+
+def test_healthy_automatic_start_does_not_require_ssh(vm_control, monkeypatch):
+    info = running_vm()
+    def cloud(project, *args):
+        if args[:3] == ('compute', 'addresses', 'list'):
+            return [{'users': [info['selfLink']]}]
+        return info
+    monkeypatch.setattr(vm_control, 'cloud', cloud)
+    monkeypatch.setattr(vm_control, 'wait_for_demo', lambda *args, **kwargs: None)
+    monkeypatch.setattr(vm_control.subprocess, 'run', lambda *args, **kwargs: pytest.fail('Healthy automatic startup must not depend on SSH'))
+    monkeypatch.setattr(sys, 'argv', ['demo_vm.py', 'start'])
+    vm_control.main()

@@ -82,6 +82,12 @@ def main():
     if state == 'TERMINATED':
         print('Starting the shared VM...', flush=True)
         cloud(project, 'compute', 'instances', 'start', instance, '--zone', zone)
+    # Normal boot uses Docker's restart policy and needs no SSH connection.
+    try:
+        wait_for_demo(host, port, timeout=30)
+        return
+    except RuntimeError:
+        pass
     # Explicitly start only this app, including if someone previously stopped it.
     for attempt in range(12):
         try:
