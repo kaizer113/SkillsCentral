@@ -1,6 +1,6 @@
 # Deployment and service operations
 
-The app runs in one Docker container on an existing shared Compute Engine VM. Application and Vertex AI model placement stay in GCP `us-east4`. The scripts reuse the VM and the existing Redis/Iris services; they do not provision infrastructure.
+The app runs in one Docker container on an existing shared Compute Engine VM. Application and Vertex AI model placement stay in GCP `us-east4`. The deployment scripts reuse the VM and the existing Redis/Iris services. A reserved public IP keeps the application URL and Gateway upstream stable across VM shutdowns.
 
 ## Private configuration
 
@@ -39,6 +39,25 @@ bash scripts/demo-service.sh logs
 ```
 
 The [service-control script](../scripts/demo-service.sh) addresses only this container. Stopping the shared VM would affect other demos. Stopping the app prevents its model requests; the shared VM and existing Redis/Iris services retain independent billing. Redis records under `SkillsCentral:` and immutable Playbook history persist across app restarts.
+
+## Shut down and restart the VM
+
+When the whole shared VM should be off, use:
+
+```bash
+bash scripts/demo-vm.sh stop
+bash scripts/demo-vm.sh status
+# Later, restore the existing demo without a rebuild:
+bash scripts/demo-vm.sh start
+```
+
+The [VM-control script](../scripts/demo_vm.py) reads the same private configuration. Before stopping, it checks that the configured public host matches the VM and its existing address is reserved. This prevents shutdown from releasing a temporary address and breaking the demo URL or the Context Gateway upstream. It stops the VM without separately stopping containers, so their restart policies remain effective. **Every service on the shared VM is offline while the VM is stopped.**
+
+Startup resumes the VM, starts the existing `skillscentral` container, and waits for both `/api/health` (including Redis connectivity) and `/api/usage`. Docker must be enabled at boot; the deployed container uses `--restart unless-stopped`. The persistent boot disk retains `/opt/skillscentral`, the private configuration, and the local image. Redis history and catalog records remain in the existing Redis Cloud database; Iris services and immutable Playbook versions remain outside this VM. No source sync or demo reset is needed after a normal restart.
+
+The existing public IP has been promoted to a regional static address in `us-east4`, labeled `owner=lionel_giavelli` and `skip_deletion=yes`. [Google documents address promotion](https://docs.cloud.google.com/vpc/docs/reserve-static-external-ip-address#promote_ephemeral_ip): it preserves the address already assigned to the VM. The control script does not create or delete resources. Stopping the VM ends its active compute usage; retained disks, the reserved IP, and existing Redis/Iris services can continue to incur charges. See [Google's stop/start documentation](https://docs.cloud.google.com/compute/docs/instances/stop-start-instance).
+
+Before presenting after a restart, run the Gateway-assisted prompt below. The startup health checks do not exercise Gemini, the remote Gateway, Agent Memory, or Lens end to end.
 
 ## Verify the deployment
 
